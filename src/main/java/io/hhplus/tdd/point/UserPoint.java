@@ -5,8 +5,13 @@ public record UserPoint(
         long point,
         long updateMillis
 ) {
+    public static final long EMPTY_POINT = Long.MIN_VALUE - 1;
 
     public static UserPoint empty(long id) {
-        return new UserPoint(id, 0, System.currentTimeMillis());
+        return new UserPoint(id, EMPTY_POINT, System.currentTimeMillis());
+    }
+
+    public boolean isEmpty() {
+        return point == EMPTY_POINT;
     }
 }
