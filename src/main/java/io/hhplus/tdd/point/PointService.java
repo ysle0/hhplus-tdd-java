@@ -34,12 +34,12 @@ public class PointService {
             // If user does not exist, create a new UserPoint with the given amount
             newUserPoint = userPointTable.insertOrUpdate(userID, amount);
         } else {
-            final var addedPoint = found.point() + amount;
+            final long addedPoint = found.point() + amount;
             newUserPoint = userPointTable.insertOrUpdate(userID, addedPoint);
         }
 
-        final long updateTook = (System.nanoTime() - updateStart) / 1_000;
-        pointHistoryTable.insert(userID, amount, TransactionType.CHARGE, updateTook);
+        final long updateTookMs = (System.nanoTime() - updateStartNs) / 1_000_000;
+        pointHistoryTable.insert(userID, amount, TransactionType.CHARGE, updateTookMs);
 
         return newUserPoint;
     }
