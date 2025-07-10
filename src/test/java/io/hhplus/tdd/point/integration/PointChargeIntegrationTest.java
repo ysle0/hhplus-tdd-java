@@ -87,7 +87,7 @@ public class PointChargeIntegrationTest {
         );
 
         performer.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value(NegativePointException.MakeExMsg(amount)));
+                .andExpect(jsonPath("$.message").value(NegativePointException.makeExMsg(amount)));
     }
 
     @DisplayName("PATCH /point/{id}/charge returns 200 with unchanged balance for zero amount")

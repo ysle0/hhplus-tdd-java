@@ -103,7 +103,7 @@ public class PointChargeUnitTest {
         // ASSERT
         assert actualEx != null;
         assertEquals(
-                NegativePointException.MakeExMsg(amount),
+                NegativePointException.makeExMsg(amount),
                 actualEx.getMessage());
         verifyNoInteractions(userPointTable, pointHistoryTable);
     }
@@ -126,7 +126,7 @@ public class PointChargeUnitTest {
         // ASSERT
         assert actualEx != null;
         assertEquals(
-                UserNotFoundException.MakeExMsg(wrongUserID),
+                UserNotFoundException.makeExMsg(wrongUserID),
                 actualEx.getMessage());
 
         verify(pointHistoryTable, Mockito.times(0))
@@ -162,7 +162,7 @@ public class PointChargeUnitTest {
         // ASSERT
         assert actualEx != null;
         assertEquals(
-                NegativePointException.MakeExMsg(negative),
+                NegativePointException.makeExMsg(negative),
                 actualEx.getMessage());
     }
 

@@ -113,7 +113,7 @@ public class PointHistoryIntegrationTest {
         );
 
         performer.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value(UserNotFoundException.MakeExMsg(invalidUserId)));
+                .andExpect(jsonPath("$.message").value(UserNotFoundException.makeExMsg(invalidUserId)));
     }
 
     @Test

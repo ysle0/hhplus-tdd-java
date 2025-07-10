@@ -59,7 +59,7 @@ public class PointShowUnitTest {
         // ASSERT
         assert actualEx != null;
         assertEquals(
-                UserNotFoundException.MakeExMsg(wrongUserID),
+                UserNotFoundException.makeExMsg(wrongUserID),
                 actualEx.getMessage());
 
         verify(pointHistoryTable, Mockito.times(0))

@@ -72,7 +72,7 @@ public class PointShowIntegrationTest {
         );
 
         performer.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value(UserNotFoundException.MakeExMsg(invalidUserId)));
+                .andExpect(jsonPath("$.message").value(UserNotFoundException.makeExMsg(invalidUserId)));
     }
 
     @DisplayName("GET /point/{id} returns 200 with updated balance after state changes")

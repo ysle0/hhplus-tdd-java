@@ -54,7 +54,7 @@ public class PointUseUnitTest {
         // ASSERT
         assert actualEx != null;
         assert actualEx instanceof NegativePointException;
-        assert NegativePointException.MakeExMsg(used)
+        assert NegativePointException.makeExMsg(used)
                 .equals(actualEx.getMessage());
     }
 
@@ -76,7 +76,7 @@ public class PointUseUnitTest {
         // ASSERT
         assert actualEx != null;
         assertEquals(
-                UserNotFoundException.MakeExMsg(wrongUserID),
+                UserNotFoundException.makeExMsg(wrongUserID),
                 actualEx.getMessage());
 
         verify(pointHistoryTable, Mockito.times(0))
@@ -104,7 +104,7 @@ public class PointUseUnitTest {
         assert result != null;
         assert result instanceof NotEnoughPointException;
         assert result.getMessage().equals(
-                NotEnoughPointException.MakeExMsg(TEST_USER_ID, requestedPoints, availablePoints));
+                NotEnoughPointException.makeExMsg(TEST_USER_ID, requestedPoints, availablePoints));
 
         // Check that user still has original points
         var userPoint = userPointTable.selectById(TEST_USER_ID);

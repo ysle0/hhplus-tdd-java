@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class NegativePointException extends RuntimeException {
     public NegativePointException(long p) {
-        super(MakeExMsg(p));
+        super(makeExMsg(p));
     }
 
-    public static String MakeExMsg(long p) {
+    public static String makeExMsg(long p) {
         return "Negative point is not allowed. point: %d".formatted(p);
     }
 }

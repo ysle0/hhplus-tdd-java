@@ -67,6 +67,6 @@ public class PointHistoryUnitTest {
 
         // Assert
         assert actualEx instanceof UserNotFoundException;
-        assertEquals(UserNotFoundException.MakeExMsg(wrongUserID), actualEx.getMessage());
+        assertEquals(UserNotFoundException.makeExMsg(wrongUserID), actualEx.getMessage());
     }
 }

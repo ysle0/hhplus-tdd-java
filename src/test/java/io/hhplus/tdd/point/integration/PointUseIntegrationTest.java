@@ -108,7 +108,7 @@ public class PointUseIntegrationTest {
         );
 
         performer.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value(UserNotFoundException.MakeExMsg(TEST_USER_ID_INVALID)));
+                .andExpect(jsonPath("$.message").value(UserNotFoundException.makeExMsg(TEST_USER_ID_INVALID)));
     }
 
     @DisplayName("PATCH /point/{id}/use returns 400 with error message for insufficient balance")
@@ -129,7 +129,7 @@ public class PointUseIntegrationTest {
 
         performer.andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message")
-                        .value(NotEnoughPointException.MakeExMsg(TEST_USER_ID, usedPoint, INIT_BALANCE)));
+                        .value(NotEnoughPointException.makeExMsg(TEST_USER_ID, usedPoint, INIT_BALANCE)));
     }
 
     @DisplayName("PATCH /point/{id}/use returns 400 with error message for negative amounts")
@@ -149,7 +149,7 @@ public class PointUseIntegrationTest {
         );
 
         performer.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value(NegativePointException.MakeExMsg(usedPoint)));
+                .andExpect(jsonPath("$.message").value(NegativePointException.makeExMsg(usedPoint)));
     }
 
     @Test
