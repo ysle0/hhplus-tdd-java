@@ -5,7 +5,7 @@ public record UserPoint(
         long point,
         long updateMillis
 ) {
-    public static final long EMPTY_POINT = Long.MIN_VALUE - 1;
+    public static final long EMPTY_POINT = Long.MIN_VALUE;
 
     public static UserPoint empty(long id) {
         return new UserPoint(id, EMPTY_POINT, System.currentTimeMillis());
