@@ -5,11 +5,9 @@ import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.exception.NegativePointException;
 import io.hhplus.tdd.point.exception.NotEnoughPointException;
 import io.hhplus.tdd.point.exception.UserNotFoundException;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PointService {
@@ -26,8 +24,8 @@ public class PointService {
             throw new NegativePointException(amount);
         }
 
-        final long updateStart = System.nanoTime();
-        final var found = userPointTable.selectById(userID);
+        final long updateStartNs = System.nanoTime();
+        UserPoint found = userPointTable.selectById(userID);
 
         UserPoint newUserPoint;
         if (found.isEmpty()) {
@@ -50,26 +48,26 @@ public class PointService {
             throw new NegativePointException(amount);
         }
 
-        final long updateStartMs = System.nanoTime();
-        final var found = userPointTable.selectById(userID);
+        final long updateStartNs = System.nanoTime();
+        UserPoint found = userPointTable.selectById(userID);
         if (found.isEmpty()) {
             throw new UserNotFoundException(userID);
         }
 
-        final var diff = found.point() - amount;
+        final long diff = found.point() - amount;
         if (diff < 0) {
             throw new NotEnoughPointException(userID, amount, found.point());
         }
 
-        final var newUserPoint = userPointTable.insertOrUpdate(userID, diff);
-        final long updateTookMs = (System.nanoTime() - updateStartMs) / 1_000_000;
+        UserPoint newUserPoint = userPointTable.insertOrUpdate(userID, diff);
+        final long updateTookMs = (System.nanoTime() - updateStartNs) / 1_000_000;
         pointHistoryTable.insert(userID, amount, TransactionType.USE, updateTookMs);
 
         return newUserPoint;
     }
 
     public UserPoint showPoint(long userID) throws UserNotFoundException {
-        var found = userPointTable.selectById(userID);
+        UserPoint found = userPointTable.selectById(userID);
         if (found.isEmpty()) {
             throw new UserNotFoundException(userID);
         }
@@ -78,7 +76,7 @@ public class PointService {
     }
 
     public List<PointHistory> showPointHistory(long userID) throws UserNotFoundException {
-        var founds = pointHistoryTable.selectAllByUserId(userID);
+        List<PointHistory> founds = pointHistoryTable.selectAllByUserId(userID);
         if (founds.isEmpty()) {
             throw new UserNotFoundException(userID);
         }
