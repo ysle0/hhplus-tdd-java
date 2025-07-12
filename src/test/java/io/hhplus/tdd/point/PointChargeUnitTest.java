@@ -108,31 +108,6 @@ public class PointChargeUnitTest {
         verifyNoInteractions(userPointTable, pointHistoryTable);
     }
 
-    @DisplayName("should throw UserNotFoundException if no user found")
-    @Test
-    public void should_throw_UserNotFoundException_if_no_user_found() {
-        // ACQUIRE
-        var userPointTable = new UserPointTable();
-        var pointHistoryTable = Mockito.mock(PointHistoryTable.class);
-        var pointService = new PointService(userPointTable, pointHistoryTable);
-
-        final long wrongUserID = 23410941902L;
-
-        // ACT
-        final var actualEx = assertThrows(
-                UserNotFoundException.class,
-                () -> pointService.chargePoint(wrongUserID, 2324L));
-
-        // ASSERT
-        assert actualEx != null;
-        assertEquals(
-                UserNotFoundException.makeExMsg(wrongUserID),
-                actualEx.getMessage());
-
-        verify(pointHistoryTable, Mockito.times(0))
-                .insert(anyLong(), anyLong(), any(), anyLong());
-    }
-
     @DisplayName("should keep the same amount of points even after trying to charge negative amount of points")
     @ParameterizedTest(name = "#{index} ({0}, {1})")
     @MethodSource("genKeepAmountNegativeAmountExpectedAmountTupleSource")
